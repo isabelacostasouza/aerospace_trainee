@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="AeroSpace_Trainee.jnlp">
+  <information>
+    <title>AeroSpace_Trainee</title>
+    <vendor>isabe</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="AeroSpace_Trainee.jar" size="1472163" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="AeroSpace_Trainee" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="paginaMenu.main"  name="AeroSpace_Trainee" />
+  <update check="always"/>
+</jnlp>

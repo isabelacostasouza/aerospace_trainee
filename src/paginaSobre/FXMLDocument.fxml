@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="tableColumnNome" prefHeight="248.0" prefWidth="546.0" style="-fx-background-color: #484848; -fx-border-color: #cfcfcf; -fx-border-width: 6px;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paginaSobre.FXMLDocumentController">
+   <children>
+      <Label layoutX="179.0" layoutY="43.0" text="Sobre o aplicativo" textFill="#f5f4f4">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="123.0" layoutY="128.0" text="Isabela Costa: Design e Codigo POO" textFill="#f5f4f4">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="170.0" text="Samir: Tradução img-txt e compressão de imagem" textFill="#f5f4f4">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
