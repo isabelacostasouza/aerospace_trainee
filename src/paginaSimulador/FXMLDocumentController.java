@@ -58,10 +58,39 @@ public class FXMLDocumentController implements Initializable {
     }
     
     void simular() {
-        this.temperatura.setText("Temperatura: " + getTemperatura() + "ºC");
-        this.pressao.setText("Pressao: " + getPressao() + " hPa");
-        this.altitude.setText("Altitude: " + getAltitude() + "m");
-        this.umidade.setText("Umidade: " + getUmidade() + "%");
+        String sms, temp, prs, alt, umd;
+        
+        temp = "Temperatura: " + getTemperatura() + "ºC";
+        prs = "Pressao: " + getPressao() + " hPa";
+        alt = "Altitude: " + getAltitude() + "m";
+        umd = "Umidade: " + getUmidade() + "%";
+        
+        this.temperatura.setText(temp);
+        this.pressao.setText(prs);
+        this.altitude.setText(alt);
+        this.umidade.setText(umd);
+        
+        sms = temp + " " + prs + " " + alt + " " + umd;
+        enviaSms(sms);
+               
+    }
+    
+    void enviaSms(String str){
+        String sms = "";
+        System.out.println("----- Inicio Conteudo SMS:");
+        //Set SMS format to ASCII
+        sms += "AT+CMGF=1\r\n";
+        //Send new SMS command and message number
+        sms += "AT+CMGS=\"07194XXXXX\"\r\n";
+        //Send SMS content
+        sms += str;
+        //Send Ctrl+Z / ESC to denote SMS message is complete
+        sms += (char)26;        
+        /*
+        agora sms contem todo o conteudo necessario para enviar 1 mensagem
+        e a mensagem pode ser enviada
+        */
+        System.out.println(sms+"\n----- Fim conteudo SMS.\n");
     }
     
     @FXML
