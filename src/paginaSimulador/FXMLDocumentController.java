@@ -35,34 +35,24 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label umidade;
 
-    int randomizarIndex() {
-        Random gerador = new Random();
-        return gerador.nextInt(5);
-    }
-    
-    int getTemperatura() {
-        int temperatura[] = {-15, 0, 10, 20, 35};
-        return temperatura[randomizarIndex()];
-    }
-    int getPressao() {
-        int pressao[] = {410, 535, 700, 973, 1000};
-        return pressao[randomizarIndex()];
-    }
-    int getAltitude() {
-        int altitude[] = {771, 820, 1200, 1370, 1567};
-        return altitude[randomizarIndex()];
-    }
-    int getUmidade() {
-        int umidade[] = {50, 62, 69, 74, 81};
-        return umidade[randomizarIndex()];
-    }
-    
     void simular() {
-        this.temperatura.setText("Temperatura: " + getTemperatura() + "ºC");
-        this.pressao.setText("Pressao: " + getPressao() + " hPa");
-        this.altitude.setText("Altitude: " + getAltitude() + "m");
-        this.umidade.setText("Umidade: " + getUmidade() + "%");
+        String sms, temp, prs, alt, umd;
+        
+        temp = "Temperatura: " + BME.getTemperatura() + "ºC";
+        prs = "Pressao: " + BME.getPressao() + " hPa";
+        alt = "Altitude: " + BME.getAltitude() + "m";
+        umd = "Umidade: " + BME.getUmidade() + "%";
+        
+        this.temperatura.setText(temp);
+        this.pressao.setText(prs);
+        this.altitude.setText(alt);
+        this.umidade.setText(umd);
+        
+        sms = temp + " " + prs + " " + alt + " " + umd;
+        SMS.enviar(sms);
+               
     }
+    
     
     @FXML
     void simular(ActionEvent event) {

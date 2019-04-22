@@ -1,13 +1,8 @@
 package paginaCodificarImagem;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +18,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import java.io.IOException;
+
+
 
 public class FXMLDocumentController implements Initializable {
 
@@ -42,36 +40,20 @@ public class FXMLDocumentController implements Initializable {
         imageToCodify.setImage(newImage);
     }
     
-     
-    String codificar(String imagePath) {
-        String base64Image = "";
-        File file = new File(imagePath);
-        
-        try (FileInputStream imageInFile = new FileInputStream(file)) {
-            // Reading a Image file from file system
-            byte imageData[] = new byte[(int) file.length()];
-            imageInFile.read(imageData);
-            base64Image = Base64.getEncoder().encodeToString(imageData);
-        } catch (FileNotFoundException e) {
-            System.out.println("Image not found" + e);
-        } catch (IOException ioe) {
-            System.out.println("Exception while reading the Image " + ioe);
-        }
-        
-        return base64Image;
-    }
-    
     @FXML
     void codificar(ActionEvent event) {
+        String text=null;
         if(contador == 5) 
             contador = 0;
         
-        String url[] = {"/imagens/imagem_1.jpg", "/imagens/imagem_2.jpg", "/imagens/imagem_3.jpg", "/imagens/imagem_4.jpg","/imagens/imagem_5.jpg"};
-        setImage(url[contador]);
+        String url[] = {"/imagens/imagem_1", "/imagens/imagem_2", "/imagens/imagem_3", "/imagens/imagem_4","/imagens/imagem_5"};
+        setImage(url[contador]+".jpg");
         
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
-        String text = codificar(s+"/src"+url[contador]);
+        try {
+            text = Imagem.codificar(s+"/src"+url[contador]);
+        } catch(Exception e){}
         this.textCodified.setText(text);
         
         contador++;
@@ -114,11 +96,14 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String text = null;
         setImage("/imagens/imagem_1.jpg");
         
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
-        String text = codificar(s+"/src/imagens/imagem_1.jpg");
+        try{
+            text = Imagem.codificar(s+"/src/imagens/imagem_1");
+        } catch (Exception e) {}
         this.textCodified.setText(text);
         contador = 1;
     }
